@@ -1,0 +1,10 @@
+{
+  "name": "tcp_10_clients_50ms",
+  "transport": "tcp",
+  "port": 9000,
+  "clients": 10,
+  "durationSec": 20,
+  "latencyMs": 50,
+  "jitterMs": 10,
+  "lossProb": 0.02
+}

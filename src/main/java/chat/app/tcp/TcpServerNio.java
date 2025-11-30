@@ -1,6 +1,8 @@
 package main.java.chat.app.tcp;
 
 import main.java.chat.app.common.Message;
+import main.java.chat.app.common.ServerMetrics;
+
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -12,6 +14,8 @@ import java.util.*;
 /**
  * TCP server using NIO Selector. Accepts clients, reads newline-terminated text messages,
  * responds to PING with PONG, and broadcasts other messages to all connected clients.
+ *
+ * Now records server-side metrics via ServerMetrics (if provided).
  */
 public class TcpServerNio implements Runnable {
     private final int port;
@@ -19,9 +23,15 @@ public class TcpServerNio implements Runnable {
     private final ServerSocketChannel serverChannel;
     private final List<SocketChannel> clients = Collections.synchronizedList(new ArrayList<>());
     private volatile boolean running = true;
+    private final ServerMetrics serverMetrics;
 
     public TcpServerNio(int port) throws IOException {
+        this(port, null);
+    }
+
+    public TcpServerNio(int port, ServerMetrics serverMetrics) throws IOException {
         this.port = port;
+        this.serverMetrics = serverMetrics;
         this.selector = Selector.open();
         this.serverChannel = ServerSocketChannel.open();
         serverChannel.configureBlocking(false);
@@ -44,7 +54,6 @@ public class TcpServerNio implements Runnable {
                         if (key.isAcceptable()) handleAccept();
                         else if (key.isReadable()) handleRead(key);
                     } catch (IOException e) {
-                        // on exception, cancel key and close channel
                         Channel ch = key.channel();
                         key.cancel();
                         if (ch instanceof SocketChannel) {
@@ -79,34 +88,46 @@ public class TcpServerNio implements Runnable {
             return;
         }
         if (read == 0) return;
+        if (serverMetrics != null) serverMetrics.addBytesReceived(read);
+
         buf.flip();
         byte[] bytes = new byte[buf.limit()];
         buf.get(bytes);
         buf.clear();
+        long start = System.nanoTime();
         String s = new String(bytes, StandardCharsets.UTF_8);
-        // messages can be multiple lines; process line by line
         String[] lines = s.split("\n");
         for (String line : lines) {
             if (line.trim().isEmpty()) continue;
             if (line.startsWith("PING:")) {
                 // reply only to this socket with PONG (replace PING with PONG)
                 String pong = line.replaceFirst("PING", "PONG") + "\n";
-                sc.write(ByteBuffer.wrap(pong.getBytes(StandardCharsets.UTF_8)));
+                byte[] outb = pong.getBytes(StandardCharsets.UTF_8);
+                sc.write(ByteBuffer.wrap(outb));
+                if (serverMetrics != null) {
+                    serverMetrics.addBytesSent(outb.length);
+                    serverMetrics.incMessagesSent();
+                }
             } else {
                 // broadcast to all clients
-                broadcast(line + "\n");
+                byte[] out = Message.toBytes(line);
+                broadcast(out);
             }
+            if (serverMetrics != null) serverMetrics.incMessagesReceived();
         }
+        long procNs = System.nanoTime() - start;
+        if (serverMetrics != null) serverMetrics.recordProcessingNs(procNs);
     }
 
-    private void broadcast(String msg) {
-        byte[] b = Message.toBytes(msg);
+    private void broadcast(byte[] outBytes) {
         synchronized (clients) {
             Iterator<SocketChannel> it = clients.iterator();
             while (it.hasNext()) {
                 SocketChannel c = it.next();
                 try {
-                    c.write(ByteBuffer.wrap(b));
+                    c.write(ByteBuffer.wrap(outBytes));
+                    if (serverMetrics != null) serverMetrics.addBytesSent(outBytes.length);
+                    if (serverMetrics != null) serverMetrics.incMessagesSent();
                 } catch (IOException e) {
                     it.remove();
                     try { c.close(); } catch (IOException ignored) {}
