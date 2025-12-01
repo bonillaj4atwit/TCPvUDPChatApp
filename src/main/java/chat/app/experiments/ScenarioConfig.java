@@ -30,4 +30,3 @@ public class ScenarioConfig {
 
     // getters/setters optional (Jackson can use public fields)
 }
-
