@@ -1,7 +1,7 @@
-package main.java.chat.app.tcp;
+package chat.app.tcp;
 
-import main.java.chat.app.common.Message;
-import main.java.chat.app.common.ServerMetrics;
+import chat.app.common.Message;
+import chat.app.common.ServerMetrics;
 
 
 import java.io.IOException;

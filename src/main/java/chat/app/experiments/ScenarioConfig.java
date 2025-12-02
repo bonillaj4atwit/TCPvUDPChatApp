@@ -1,4 +1,4 @@
-package main.java.chat.app.experiments;
+package chat.app.experiments;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

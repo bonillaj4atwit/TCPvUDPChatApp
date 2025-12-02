@@ -1,11 +1,11 @@
-package main.java.chat.app.experiments;
+package chat.app.experiments;
 
-import main.java.chat.app.common.NetworkEmulator;
-import main.java.chat.app.common.Metrics;
-import main.java.chat.app.tcp.TcpServerNio;
-import main.java.chat.app.tcp.TcpClientNio;
-import main.java.chat.app.udp.UdpServerNio;
-import main.java.chat.app.udp.UdpClientNio;
+import chat.app.common.NetworkEmulator;
+import chat.app.common.Metrics;
+import chat.app.tcp.TcpServerNio;
+import chat.app.tcp.TcpClientNio;
+import chat.app.udp.UdpServerNio;
+import chat.app.udp.UdpClientNio;
 
 import java.io.File;
 import java.util.*;

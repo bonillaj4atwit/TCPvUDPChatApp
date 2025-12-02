@@ -1,6 +1,6 @@
-package main.java.chat.app.experiments;
+package chat.app.experiments;
 
-import main.java.chat.app.common.Metrics;
+import chat.app.common.Metrics;
 
 import java.io.*;
 import java.util.*;
@@ -65,6 +65,7 @@ public class CombinedResultsWriter {
                 try {
                     java.lang.reflect.Field f = Metrics.class.getDeclaredField("rttSamples");
                     f.setAccessible(true);
+                    @SuppressWarnings("unchecked")
                     List<Long> samples = (List<Long>) f.get(m);
                     synchronized (samples) {
                         for (Long ns : samples) allRttsMs.add(ns / 1_000_000.0);

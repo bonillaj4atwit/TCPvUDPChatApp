@@ -1,4 +1,4 @@
-package main.java.chat.app.common;
+package chat.app.common;
 
 import java.util.*;
 import java.util.concurrent.atomic.*;

@@ -1,8 +1,8 @@
-package main.java.chat.app.tcp;
+package chat.app.tcp;
 
-import main.java.chat.app.common.Message;
-import main.java.chat.app.common.NetworkEmulator;
-import main.java.chat.app.common.Metrics;
+import chat.app.common.Message;
+import chat.app.common.NetworkEmulator;
+import chat.app.common.Metrics;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;

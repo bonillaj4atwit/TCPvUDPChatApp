@@ -1,4 +1,4 @@
-package main.java.chat.app.common;
+package chat.app.common;
 
 import java.util.Random;
 import java.util.concurrent.*;

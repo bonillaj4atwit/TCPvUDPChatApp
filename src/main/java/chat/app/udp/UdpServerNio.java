@@ -1,7 +1,7 @@
-package main.java.chat.app.udp;
+package chat.app.udp;
 
-import main.java.chat.app.common.Message;
-import main.java.chat.app.common.ServerMetrics;
+import chat.app.common.Message;
+import chat.app.common.ServerMetrics;
 
 
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package main.java.chat.app.common;
+package chat.app.common;
 
 import java.io.*;
 import java.lang.management.ManagementFactory;
