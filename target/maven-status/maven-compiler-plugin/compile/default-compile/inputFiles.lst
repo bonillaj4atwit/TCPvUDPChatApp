@@ -1,0 +1,13 @@
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\AppLauncher.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\common\Message.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\common\Metrics.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\common\NetworkEmulator.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\common\ServerMetrics.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\experiments\BatchRunner.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\experiments\CombinedResultsWriter.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\experiments\ScenarioConfig.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\experiments\TestHarness.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\tcp\TcpClientNio.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\tcp\TcpServerNio.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\udp\UdpClientNio.java
+C:\Users\jaegr\TCPvUDPChatApp\src\main\java\chat\app\udp\UdpServerNio.java

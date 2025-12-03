@@ -1,0 +1,7 @@
+info,scenario=tcp_10_clients_50ms,transport=tcp
+messagesReceived,1274
+messagesSent,10875
+bytesReceived,28757
+bytesSent,239979
+medianProcessingMs,0.1405
+processingSamplesCount,1232

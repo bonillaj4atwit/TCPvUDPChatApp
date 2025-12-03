@@ -10,8 +10,7 @@
   <name>Java Chat TCP vs UDP Evaluation</name>
 
   <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.release>17</maven.compiler.release>
   </properties>
 
   <dependencies>
@@ -38,15 +37,16 @@
   </dependencies>
 
   <build>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>exec-maven-plugin</artifactId>
-        <version>3.1.0</version>
-        <configuration>
-          <mainClass>chat.experiments.BatchRunner</mainClass>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
+  <plugins>
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>exec-maven-plugin</artifactId>
+      <version>3.1.0</version>
+      <configuration>
+        <mainClass>chat.app.AppLauncher</mainClass>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
 </project>

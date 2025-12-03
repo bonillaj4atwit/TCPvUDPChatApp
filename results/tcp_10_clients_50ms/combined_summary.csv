@@ -1,0 +1,14 @@
+scenario,tcp_10_clients_50ms
+transport,tcp
+clients,10
+latencyMs,50
+lossProb,0.02
+
+totalBytesSent,28757
+totalBytesReceived,239979
+totalMessagesSent,1274
+totalMessagesReceived,10875
+rtt_median_ms,62.2444
+rtt_p95_ms,64.83062000000001
+rtt_mean_ms,58.64580241545894
+rtt_samples,207
